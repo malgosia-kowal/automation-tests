@@ -13,3 +13,14 @@ test('cookiesAcceptation', async({page})=>{
     await element.acceptCookiesAgreements();
     await element.checkCookiesClosed();
 })
+//Clicking on learmore and checking redirection
+test('cookiesLearnMore', async({page})=>{
+
+    const element =  new CookiesAgremeents(page);
+    const open = new Newsletter_SignIn(page); 
+  
+      await open.openPage();
+      await element.learnMoreAgreements();
+      //await page.pause();
+      await element.checkPolicyPageOpen();
+})
