@@ -16,11 +16,10 @@ test('cookiesAcceptation', async({page})=>{
 //Clicking on learmore and checking redirection
 test('cookiesLearnMore', async({page})=>{
 
-    const element =  new CookiesAgremeents(page);
-    const open = new Newsletter_SignIn(page); 
+  const element =  new CookiesAgremeents(page);
+  const open = new Newsletter_SignIn(page); 
   
-      await open.openPage();
-      await element.learnMoreAgreements();
-      //await page.pause();
-      await element.checkPolicyPageOpen();
+    await open.openPage();
+    await element.learnMoreAgreements();
+    await element.checkPolicyPageOpen();
 })
