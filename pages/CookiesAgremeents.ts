@@ -2,6 +2,7 @@ import { test, expect, type Page } from '@playwright/test';
 
 
 export class CookiesAgremeents{
+   
 
     public AgreeCookiesButton: any;
     public checkIfCookiesVisible: any;
