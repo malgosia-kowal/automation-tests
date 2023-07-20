@@ -1,5 +1,5 @@
 
-import { Page, expect } from "@playwright/test";
+import { Page, chromium, expect } from "@playwright/test";
 
  export class homePage{
 
@@ -18,6 +18,7 @@ import { Page, expect } from "@playwright/test";
     public checkIfCookiesVisible: any;
     public learnMoreCookies: any;
     public checkIfPolicyPageOpen:any;
+   
     
    
 
@@ -40,6 +41,7 @@ constructor(public page: Page){
 }
 async openPage(){
 
+    const browser = await chromium.launch({ headless: true });
     await this.page.goto('https://jestemslow.pl');
    
 }
