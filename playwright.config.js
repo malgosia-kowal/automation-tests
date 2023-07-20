@@ -34,7 +34,7 @@ exports.default = (0, test_1.defineConfig)({
     projects: [
         {
             name: 'chromium',
-            use: Object.assign(Object.assign({}, test_1.devices['Desktop Chrome']), { headless: false }),
+            use: Object.assign(Object.assign({}, test_1.devices['Desktop Chrome']), { headless: true }),
         },
         // {
         //   name: 'firefox',
