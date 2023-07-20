@@ -1,12 +1,12 @@
 import { test, expect, type Page } from '@playwright/test';
-import {Newsletter_SignIn} from '../pages/Newsletter_SignIn';
+import { homePage } from '../pages/homePage';
 
 
 
 //Check if user can succesfully sign in to Newsletter 
 test('SignInToNewsletter', async ({ page }) => {
 
-  const login = new Newsletter_SignIn(page);
+  const login = new homePage(page);
 
     await login.openPage();
     await login.enterUsername();
@@ -19,7 +19,7 @@ test('SignInToNewsletter', async ({ page }) => {
 //Check if user can close Newsletter without signed in 
 test('CloseWithoutSignIn', async ({ page }) => {
 
-  const login = new Newsletter_SignIn(page);
+  const login = new homePage(page);
 
     await login.openPage();
     await login.clickCloseIcon();
@@ -29,7 +29,7 @@ test('CloseWithoutSignIn', async ({ page }) => {
 //Check validation message when email is incorrect 
 test('CheckEmailValidation', async ({ page }) => {
 
-  const login = new Newsletter_SignIn(page);
+  const login = new homePage(page);
 
     await login.openPage();
     await login.enterUsername();

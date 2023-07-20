@@ -1,25 +1,25 @@
 import { test, expect, type Page } from '@playwright/test';
-import { CookiesAgremeents } from 'pages/CookiesAgremeents';
-import { Newsletter_SignIn } from 'pages/Newsletter_SignIn';
+
+import {homePage} from 'pages/homePage';
 
 
 //Check if after cookies acceptation window dissapearing 
 test('cookiesAcceptation', async({page})=>{
 
-  const element =  new CookiesAgremeents(page);
-  const open = new Newsletter_SignIn(page); 
+  //const element =  new CookiesAgremeents(page);
+  const element = new homePage(page); 
 
-    await open.openPage();
+    await element.openPage();
     await element.acceptCookiesAgreements();
     await element.checkCookiesClosed();
 })
 //Clicking on learmore and checking redirection
 test('cookiesLearnMore', async({page})=>{
 
-  const element =  new CookiesAgremeents(page);
-  const open = new Newsletter_SignIn(page); 
+  //const element =  new CookiesAgremeents(page);
+  const element = new homePage(page); 
   
-    await open.openPage();
+    await element.openPage();
     await element.learnMoreAgreements();
     await element.checkPolicyPageOpen();
 })
