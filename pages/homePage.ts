@@ -43,7 +43,7 @@ constructor(public page: Page){
 async openPage(){
 
     const browser = await chromium.launch({ headless: true });
-    await this.page.goto('https://jestemslow.pl');
+    await this.page.goto('https://jestemslow.pl', { timeout: 50000 });
    
 }
 async enterUsername(){
