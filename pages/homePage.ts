@@ -22,7 +22,6 @@ import { Page, chromium, expect } from "@playwright/test";
    
     
    
-
 constructor(public page: Page){
 
     this.page = page;
@@ -43,7 +42,7 @@ constructor(public page: Page){
 async openPage(){
 
     const browser = await chromium.launch({ headless: true });
-    await this.page.goto('https://jestemslow.pl', { timeout: 50000 });
+    await this.page.goto('https://jestemslow.pl');
    
 }
 async enterUsername(){
@@ -58,7 +57,7 @@ async enterEmail(){
 }
 async checkBoxSelect() {
 
-   await this.check_box.click();
+    await this.check_box.click();
 }
 async SignInButtonClick(){
 
@@ -99,6 +98,6 @@ async learnMoreAgreements(){
 }
 async checkPolicyPageOpen(){
 
-   await this.checkIfPolicyPageOpen.toHaveCount(1);
+    await this.checkIfPolicyPageOpen.toHaveCount(1);
 }
 };
