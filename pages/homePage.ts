@@ -46,7 +46,7 @@ async openPage(){
    
 }
 async enterUsername(){
-    await this.username_field.waitFor({state: "visible"});
+    await this.username_field.waitFor({state: "visible"}, { timeout: 60000 });
     await this.username_field.click();
     await this.username_field.fill(this.username);
  }
