@@ -45,11 +45,12 @@ async openPage(){
     await this.page.goto('https://jestemslow.pl');
    
 }
-async enterUsername(){
-    await this.username_field.waitFor({state: "visible"}, { timeout: 60000 });
+ async enterUsername() {
+
+  
     await this.username_field.click();
     await this.username_field.fill(this.username);
- }
+}
 async enterEmail(){
 
     await this.email_field.click();
@@ -102,3 +103,5 @@ async checkPolicyPageOpen(){
     await this.checkIfPolicyPageOpen.toHaveCount(1);
 }
 };
+
+
