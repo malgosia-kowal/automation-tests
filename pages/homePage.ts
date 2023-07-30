@@ -25,7 +25,7 @@ import { Page, chromium, expect } from "@playwright/test";
 constructor(public page: Page){
 
     this.page = page;
-    this.username_field= this.page.frameLocator('iframe >> nth=1').getByPlaceholder('Jan Kowalski');
+    this.username_field= this.page.frameLocator('#bhr-items iframe >> nth=1').getByPlaceholder('Jan Kowalski');
     this.email_field = this.page.frameLocator('#bhr-items iframe >> nth=1').getByPlaceholder('email.address@example.com');
     this.login_button_Newslater = this.page.frameLocator('#bhr-items iframe >> nth=1').getByRole('button', { name: 'Zapisz się!' });
     this.check_box = this.page.frameLocator('#bhr-items iframe >> nth=1').locator('label').filter({ hasText: 'Kobieta' }).locator('div');
