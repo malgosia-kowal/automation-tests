@@ -15,6 +15,9 @@ export default defineConfig({
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
+  expect: {
+    timeout: 10 * 1000,
+  },
   /* Retry on CI only */
   //retries: process.env.CI ? 2 : 0,
   retries: 1,
@@ -36,7 +39,7 @@ export default defineConfig({
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'],
-      headless: false
+      headless: true
     
     },
    

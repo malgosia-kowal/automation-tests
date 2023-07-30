@@ -1,12 +1,12 @@
 import { test, expect, type Page } from '@playwright/test';
-import {Newsletter_SignIn} from '../pages/Newsletter_SignIn';
+import { homePage } from '../pages/homePage';
 
 
 
 //Check if user can succesfully sign in to Newsletter 
 test('SignInToNewsletter', async ({ page }) => {
 
-  const login = new Newsletter_SignIn(page);
+  const login = new homePage(page);
 
     await login.openPage();
     await login.enterUsername();
@@ -16,20 +16,10 @@ test('SignInToNewsletter', async ({ page }) => {
     await login.checkIfClosed();
 });
 
-//Check if user can close Newsletter without signed in 
-test('CloseWithoutSignIn', async ({ page }) => {
-
-  const login = new Newsletter_SignIn(page);
-
-    await login.openPage();
-    await login.clickCloseIcon();
-    await login.checkIfClosed();
-});
-
 //Check validation message when email is incorrect 
 test('CheckEmailValidation', async ({ page }) => {
 
-  const login = new Newsletter_SignIn(page);
+  const login = new homePage(page);
 
     await login.openPage();
     await login.enterUsername();
@@ -37,6 +27,17 @@ test('CheckEmailValidation', async ({ page }) => {
     await login.SignInButtonClick();
     await login.checkValidationEmail();
 });
+
+//Check if user can close Newsletter without signed in 
+test('CloseWithoutSignIn', async ({ page }) => {
+
+  const login = new homePage(page);
+
+    await login.openPage();
+    await login.clickCloseIcon();
+    await login.checkIfClosed();
+});
+
   
   
 
