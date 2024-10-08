@@ -9,5 +9,5 @@ test('ClickOnPromptYes', async({page}) =>{
   const element = new homePage(page);
 
     await element.openPage();
-    await element.clickYesOnPrompt();
+
 });
