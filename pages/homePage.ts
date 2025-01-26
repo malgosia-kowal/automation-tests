@@ -3,7 +3,7 @@ import { Page, chromium, expect } from "@playwright/test";
 
 
 
- export class homePage{
+ export class HomePage{
 
   public clickonPage: any;
   public clickOnTile: any;
@@ -34,6 +34,22 @@ async checkIfLeftMenuIsVisible(){
   await expect(this.page.getByText('Elements')).toBeVisible();
 
 }
+async clickOnTextBoxMenu(){
+  await this.page.locator('#item-0').first().click()
+}
+async checkIfFormApppears(){
+  
+  const fullname = await this.page.locator('[placeholder="Full Name"]').isVisible();
+}
+ async clickOnInputFieldFullName(){
+  const inputFullName = this.page.locator(('[placeholder="Full Name"]')).click()
+  
+  await this.page.locator(('[placeholder="Full Name"]')).fill('Test');
+};
+   
+//async typeTextIntoInputField(){
+  //await this.page.locator(('[placeholder="Full Name"]')).fill('Test');
+//}
 };
 
 

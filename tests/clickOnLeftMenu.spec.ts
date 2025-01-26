@@ -1,16 +1,17 @@
 import { test, expect } from '@playwright/test';
 
-import { homePage } from 'pages/homePage';
+import { HomePage } from 'pages/homePage';
 
 
-//Go to DemoQA website 
-test('OpenDemoQA page', async({page}) =>{
+//
 
-  
-  const element = new homePage(page);
+test('Open DemoQA page', async ({ page }) => {
+    const element = new HomePage(page);
 
     await element.openPage();
     await element.clickOnTileFirst();
     await element.checkIfLeftMenuIsVisible();
+    await element.clickOnTextBoxMenu();
+    await element.checkIfFormApppears();
+    await element.clickOnInputFieldFullName();
 });
-
