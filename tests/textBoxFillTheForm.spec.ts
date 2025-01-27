@@ -16,10 +16,7 @@ test.beforeEach(async ({ page }) => {
 test("Fill in Input FullName", async ({ page }) => {
   const element = new TextBox(page);
   await element.clickOnInputFieldFullName();
-});
-test("Fill in Email", async ({ page }) => {
-  const element1 = new Navigation(page);
-  const element = new TextBox(page);
-
   await element.clickOnEmailInputField();
+
 });
+

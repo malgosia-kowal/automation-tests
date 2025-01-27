@@ -19,7 +19,7 @@ export class TextBox {
   }
   async clickOnEmailInputField() {
     await this.inputEmail.click();
-    await this.inputEmail.fill("Gosia");
+    await this.inputEmail.fill('Gosia');
   }
   async checkIfFormApppears() {
     const fullname = await this.page.locator('[placeholder="Full Name"]').isVisible();
