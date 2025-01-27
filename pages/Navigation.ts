@@ -18,10 +18,8 @@ export class Navigation{
     async clickOnTileFirst() {
         await this.clickOnTile.click();
       }
-     // async checkIfLeftMenuIsVisible() {
-        //await expect(this.page.getByText("Elements")).;
-      //}
-      async clickOnTextBoxMenu() {
+    
+    async clickOnTextBoxMenu() {
         await this.page.locator("#item-0").first().click();
       }
 }

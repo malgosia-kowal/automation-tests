@@ -2,11 +2,13 @@ import { Page, chromium, expect } from "@playwright/test";
 
 export class TextBox {
   public clickonPage: any;
+  public page: Page;
   public clickOnTile: any;
   public inputFullName: any;
   public inputEmail: any;
 
-  constructor(public page: Page) {
+  constructor(page: Page) {
+    this.page = page;
     this.inputFullName = this.page.locator('[placeholder="Full Name"]');
     this.inputEmail = this.page.locator('[placeholder="name@example.com"]');
   }
