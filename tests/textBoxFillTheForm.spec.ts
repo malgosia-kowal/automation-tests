@@ -1,5 +1,4 @@
 import { test, expect } from "@playwright/test";
-
 import { TextBox } from "pages/TextBox";
 import { Navigation } from "pages/Navigation";
 
@@ -9,14 +8,18 @@ test.beforeEach(async ({ page }) => {
 
   await element.openPage();
   await element.clickOnTileFirst();
-  await element.clickOnTextBoxMenu();
+  await element.clickOnTextBoxOption;
   await element1.checkIfFormApppears();
 });
 
-test("Fill in Input FullName", async ({ page }) => {
+test("Fill in the form", async ({ page }) => {
   const element = new TextBox(page);
+
   await element.clickOnInputFieldFullName();
   await element.clickOnEmailInputField();
+  await element.clickOnCurrentAdress();
+  await element.clickOnPermanentAdress();
+  await element.clickOnSubmitButton();
 
 });
 
