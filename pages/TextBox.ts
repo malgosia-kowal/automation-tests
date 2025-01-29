@@ -28,7 +28,7 @@ export class TextBox {
   async clickOnSubmitButton() {
     await this.submitButton.click();
   }
-  async checkIfFormApppears() {
+  async verifyIfFormApppears() {
     await expect(this.page.locator('[placeholder="Full Name"]')).toBeVisible();
   }
 }

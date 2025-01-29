@@ -19,7 +19,7 @@ test.beforeEach(async ({ page }) => {
  test("Fill in the form", async ({ page }) => {
 
   await navigation.clickOnTextBoxOption();
-  await textBox.checkIfFormApppears();
+  await textBox.verifyIfFormApppears();
   await textBox.fillFullName("Test");
   await textBox.fillInputEmailField("Gosia@op.pl");
   await textBox.fillCurrentAddress("street");
