@@ -1,20 +1,17 @@
-import { Page } from "@playwright/test";
+import { Page, expect } from "@playwright/test";
 
-export class CheckBox{
+export class CheckBox {
+  readonly checkBox = this.page.locator("svg.rct-icon.rct-icon-uncheck");
+  readonly expandCheckBoxes = this.page.getByLabel("Toggle");
 
-public page: Page;
-public CheckBox: any;
-
-constructor(page:Page){
-
+  constructor(public readonly page: Page) {
     this.page = page;
-    this.CheckBox = this.page.locator('svg.rct-icon.rct-icon-uncheck').click();
-    
-}
-async selectCheckBox(){
+  }
 
-   await this.CheckBox
-}
-
-
+  async expandCheckBox() {
+    await this.expandCheckBoxes.click();
+  }
+  async selectCheckBox() {
+    await this.checkBox.click();
+  }
 }
