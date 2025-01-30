@@ -1,12 +1,12 @@
 import { Page, expect, chromium } from "@playwright/test";
 
 export class TextBox {
-  readonly inputFullName = this.page.locator('[placeholder="Full Name"]');
-  readonly inputEmail = this.page.locator('[placeholder="name@example.com"]');
-  readonly inputCurrentAdress = this.page.locator(
+  readonly fullNameInput = this.page.locator('[placeholder="Full Name"]');
+  readonly emailInput = this.page.locator('[placeholder="name@example.com"]');
+  readonly currentAddressInput = this.page.locator(
     '[placeholder= "Current Address"]',
   );
-  readonly inputPermanentAddress = this.page.locator("#permanentAddress");
+  readonly permanentAddressInput = this.page.locator("#permanentAddress");
   readonly submitButton = this.page.locator("#submit");
 
   constructor(public readonly page: Page) {
@@ -14,16 +14,16 @@ export class TextBox {
   }
 
   async fillFullName(name: string) {
-    await this.inputFullName.fill(name);
+    await this.fullNameInput.fill(name);
   }
   async fillInputEmailField(email: string) {
-    await this.inputEmail.fill(email);
+    await this.emailInput.fill(email);
   }
   async fillCurrentAddress(address: string) {
-    await this.inputCurrentAdress.fill(address);
+    await this.currentAddressInput.fill(address);
   }
   async fillPermanentAddress(permanentAddress: string) {
-    await this.inputPermanentAddress.fill(permanentAddress);
+    await this.permanentAddressInput.fill(permanentAddress);
   }
   async clickOnSubmitButton() {
     await this.submitButton.click();
