@@ -1,25 +1,30 @@
 import { test, expect } from "@playwright/test";
+import { Navigation } from "../pages/Navigation";
 import { TextBox } from "pages/TextBox";
-import { Navigation } from "pages/Navigation";
+
+test.describe("textBoxSuite", ()=>{
+ let navigation: Navigation
+ let textBox: TextBox
 
 test.beforeEach(async ({ page }) => {
-  const element = new Navigation(page);
-  const element1 = new TextBox(page);
+  navigation = new Navigation(page);
+  textBox = new TextBox(page);
 
-  await element.openPage();
-  await element.clickOnTileFirst();
-  await element.clickOnTextBoxOption;
-  await element1.checkIfFormApppears();
+  await navigation.openPage();
+  await navigation.clickOnTileFirst();
+  await navigation.clickOnTextBoxOption();
+ 
+})
+
+ test("Fill in the form", async ({ page }) => {
+
+  await navigation.clickOnTextBoxOption();
+  await textBox.verifyIfFormApppears();
+  await textBox.fillFullName("Test");
+  await textBox.fillInputEmailField("Gosia@op.pl");
+  await textBox.fillCurrentAddress("street");
+  await textBox.fillPermanentAddress("StreetPermanent");
+  await textBox.clickOnSubmitButton();
+
+ });
 });
-
-test("Fill in the form", async ({ page }) => {
-  const element = new TextBox(page);
-
-  await element.clickOnInputFieldFullName();
-  await element.clickOnEmailInputField();
-  await element.clickOnCurrentAdress();
-  await element.clickOnPermanentAdress();
-  await element.clickOnSubmitButton();
-
-});
-

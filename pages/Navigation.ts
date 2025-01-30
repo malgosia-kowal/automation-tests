@@ -1,35 +1,25 @@
-import { Page, chromium } from "@playwright/test"
+import { Page, chromium } from "@playwright/test";
 
+export class Navigation {
+  readonly tile = this.page.locator("svg").first();
+  readonly textBoxMenu = this.page.getByRole("list").getByText("Text Box");
+  readonly checkBoxMenu = this.page.locator(':text-is("Check Box")');
 
-export class Navigation{
+  constructor(public readonly page: Page) {
+    this.page = page;
+  }
+  async openPage() {
+    const browser = await chromium.launch({ headless: true });
+    await this.page.goto("https://demoqa.com/");
+  }
+  async clickOnTileFirst() {
+    await this.tile.click();
+  }
 
-    readonly page: Page;
-    readonly clickOnTile: any;
-    readonly clickOnTextBoxMenu: any;
-    readonly clickOnCheckBoxMenu: any;
-
-
-    constructor (page: Page){
-        this.page = page;
-        this.clickOnTile = this.page.locator('svg').first();
-        this.clickOnTextBoxMenu = this.page.locator("#item-0").first().click();
-        this.clickOnCheckBoxMenu = this.page.locator(':text-is("Check Box")')
-      
-
-
-    }
-    async openPage() {
-        const browser = await chromium.launch({ headless: true });
-        await this.page.goto("https://demoqa.com/");
-      }
-    async clickOnTileFirst() {
-        await this.clickOnTile.click();
-      }
-    
-    async clickOnTextBoxOption() {
-        await this.clickOnTextBoxMenu
-      }
-    async clickOnCheckBoxOption() {
-        await this.clickOnCheckBoxMenu.click();
-      }
+  async clickOnTextBoxOption() {
+    await this.textBoxMenu.click();
+  }
+  async clickOnCheckBoxOption() {
+    await this.checkBoxMenu.click();
+  }
 }

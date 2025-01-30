@@ -1,44 +1,34 @@
-import { Page, chromium, expect } from "@playwright/test";
+import { Page, expect, chromium } from "@playwright/test";
 
 export class TextBox {
-  public clickonPage: any;
-  public page: Page;
-  public clickOnTile: any;
-  public inputFullName: any;
-  public inputEmail: any;
-  public inputCurrentAdress: any;
-  public inputPermanentAdress: any;
-  public submitButton: any;
+  readonly fullNameInput = this.page.locator('[placeholder="Full Name"]');
+  readonly emailInput = this.page.locator('[placeholder="name@example.com"]');
+  readonly currentAddressInput = this.page.locator(
+    '[placeholder= "Current Address"]',
+  );
+  readonly permanentAddressInput = this.page.locator("#permanentAddress");
+  readonly submitButton = this.page.locator("#submit");
 
-  constructor(page: Page) {
+  constructor(public readonly page: Page) {
     this.page = page;
-    this.inputFullName = this.page.locator('[placeholder="Full Name"]');
-    this.inputEmail = this.page.locator('[placeholder="name@example.com"]');
-    this.inputCurrentAdress = this.page.locator('[placeholder= "Current Address"]');
-    this.inputPermanentAdress = this.page.locator('#permanentAddress');
-    this.submitButton = this.page.locator('#submit');
   }
 
-  async clickOnInputFieldFullName() {
-    await this.inputFullName.click();
-    await this.inputFullName.fill("Test");
+  async fillFullName(name: string) {
+    await this.fullNameInput.fill(name);
   }
-  async clickOnEmailInputField() {
-    await this.inputEmail.click();
-    await this.inputEmail.fill('Gosia');
+  async fillInputEmailField(email: string) {
+    await this.emailInput.fill(email);
   }
-  async clickOnCurrentAdress() {
-    await this.inputCurrentAdress.click();
-    await this.inputCurrentAdress.fill('Test with current Adress');
+  async fillCurrentAddress(address: string) {
+    await this.currentAddressInput.fill(address);
   }
-  async clickOnPermanentAdress() {
-    await this.inputPermanentAdress.click();
-    await this.inputPermanentAdress.fill('Test with Permanent Adress');
+  async fillPermanentAddress(permanentAddress: string) {
+    await this.permanentAddressInput.fill(permanentAddress);
   }
   async clickOnSubmitButton() {
     await this.submitButton.click();
   }
-  async checkIfFormApppears() {
-    const fullname = await this.page.locator('[placeholder="Full Name"]').isVisible();
+  async verifyIfFormApppears() {
+    await expect(this.page.locator('[placeholder="Full Name"]')).toBeVisible();
   }
 }

@@ -1,22 +1,24 @@
 import { Navigation } from "pages/Navigation";
 import { test, expect } from "@playwright/test";
-import { CheckBox } from "pages/CheckBox";
+import { CheckBox } from "../pages/CheckBox";
 
-test.beforeEach(async ({page}) =>{
+test.describe("checkBox", () => {
+  let navigation: Navigation;
+  let checkBox: CheckBox;
 
-const element = new Navigation(page);
+  test.beforeEach(async ({ page }) => {
+    checkBox = new CheckBox(page);
+    navigation = new Navigation(page);
 
-await element.openPage();
-await element.clickOnTileFirst();
-await element.clickOnCheckBoxOption();
-
-
-//await element2.selectCheckBox();
-
-})
-test("Select Home CheckBox", async ({ page }) => {
-    const element = new CheckBox(page);
-  
-    await element.selectCheckBox();
-  
+    await navigation.openPage();
+    await navigation.clickOnTileFirst();
+    await navigation.clickOnCheckBoxOption();
   });
+
+  test("Expand Home CheckBox", async () => {
+    await checkBox.expandCheckBox();
+  });
+  test("Select Home CheckBox", async () => {
+    await checkBox.selectCheckBox();
+  });
+});
