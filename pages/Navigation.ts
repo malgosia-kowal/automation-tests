@@ -23,8 +23,7 @@ export class Navigation {
   async clickOnCheckBoxOption() {
     await this.checkBoxMenu.click();
   }
-  async clickOnRadioButtonOption(){
+  async clickOnRadioButtonOption() {
     await this.radioButton.click();
   }
- 
 }
