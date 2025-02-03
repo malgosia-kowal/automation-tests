@@ -4,6 +4,7 @@ export class Navigation {
   readonly tile = this.page.locator("svg").first();
   readonly textBoxMenu = this.page.getByRole("list").getByText("Text Box");
   readonly checkBoxMenu = this.page.locator(':text-is("Check Box")');
+  readonly radioButton = this.page.locator(':text-is("Radio Button")');
 
   constructor(public readonly page: Page) {
     this.page = page;
@@ -22,4 +23,8 @@ export class Navigation {
   async clickOnCheckBoxOption() {
     await this.checkBoxMenu.click();
   }
+  async clickOnRadioButtonOption(){
+    await this.radioButton.click();
+  }
+ 
 }
