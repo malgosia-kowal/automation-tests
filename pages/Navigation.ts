@@ -5,6 +5,7 @@ export class Navigation {
   readonly textBoxMenu = this.page.getByRole("list").getByText("Text Box");
   readonly checkBoxMenu = this.page.locator(':text-is("Check Box")');
   readonly radioButton = this.page.locator(':text-is("Radio Button")');
+  readonly webTables = this.page.locator(".text", { hasText: "Web Tables" });
 
   constructor(public readonly page: Page) {
     this.page = page;
@@ -25,5 +26,8 @@ export class Navigation {
   }
   async clickOnRadioButtonOption() {
     await this.radioButton.click();
+  }
+  async clickOnWebTablesOption() {
+    await this.webTables.click();
   }
 }
