@@ -9,6 +9,10 @@ export class WebTables {
   readonly department = this.page.getByPlaceholder("Department");
   readonly buttonSubmit = this.page.getByRole("button", { name: "Submit" });
   readonly email = this.page.getByPlaceholder("name@example.com");
+  readonly pencilIconFirstRecord = this.page.getByTitle("Edit").first();
+  readonly createdRecord = this.page.locator(".rt-tr-group", {
+    hasText: "Margo",
+  });
 
   constructor(public readonly page: Page) {
     this.page = page;
@@ -16,25 +20,31 @@ export class WebTables {
   async clickOnAddButton() {
     await this.addButton.click();
   }
-  async typeFirstName() {
-    await this.firstName.fill("Maggie");
+  async typeFirstName(firstName: string) {
+    await this.firstName.fill(firstName);
   }
-  async typeLastName() {
-    await this.lastName.fill("Test");
+  async typeLastName(lastName: string) {
+    await this.lastName.fill(lastName);
   }
-  async typeEmail() {
-    await this.email.fill("Test@op.pl");
+  async typeEmail(email: string) {
+    await this.email.fill(email);
   }
-  async typeAge() {
-    await this.age.fill("12");
+  async typeAge(ages: string) {
+    await this.age.fill(ages);
   }
-  async typeSalary() {
-    await this.salary.fill("12");
+  async typeSalary(salary: number) {
+    await this.salary.fill(salary.toString());
   }
-  async typeDepartment() {
-    await this.department.fill("testDepartment");
+  async typeDepartment(department: string) {
+    await this.department.fill(department);
   }
   async clickOnSubmit() {
     await this.buttonSubmit.click();
+  }
+  async clickOnPencil() {
+    await this.pencilIconFirstRecord.click();
+  }
+  async verifyIfRecordWasAdded() {
+    await expect(this.createdRecord).toBeVisible();
   }
 }
