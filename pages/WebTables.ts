@@ -13,6 +13,18 @@ export class WebTables {
   readonly createdRecord = this.page.locator(".rt-tr-group", {
     hasText: "Margo",
   });
+  readonly editedRecord = this.page.locator(".rt-tr-group", {
+    hasText: "Maggie",
+  });
+  readonly searchRecord = this.page.locator(".rt-tr-group", {
+    hasText: "Cierra",
+  });
+  readonly recordInTable = this.page.locator(".rt-tr-group", {
+    hasText: "Alden",
+  });
+  readonly modal = this.page.locator("modal-content");
+  readonly closeIcon = this.page.locator(".sr-only");
+  readonly searchField = this.page.getByPlaceholder("Type To Search");
 
   constructor(public readonly page: Page) {
     this.page = page;
@@ -46,5 +58,24 @@ export class WebTables {
   }
   async verifyIfRecordWasAdded() {
     await expect(this.createdRecord).toBeVisible();
+  }
+  async verifyIfRecordWasUpdated() {
+    await expect(this.editedRecord).toBeVisible();
+  }
+  async verifyIfFormIsVisible() {
+    await expect(this.modal).toBeVisible;
+  }
+  async verifyIfFormIsNotVisible() {
+    await expect(this.modal).toBeHidden();
+  }
+  async clickOnCloseModal() {
+    await this.closeIcon.click();
+  }
+  async clickOnSearchField() {
+    await this.searchField.fill("Cierra");
+  }
+  async verifyIfSearchedRecordIsVisible() {
+    await expect(this.searchRecord).toBeVisible();
+    await expect(this.recordInTable).toBeHidden();
   }
 }
