@@ -10,21 +10,14 @@ export class WebTables {
   readonly buttonSubmit = this.page.getByRole("button", { name: "Submit" });
   readonly email = this.page.getByPlaceholder("name@example.com");
   readonly pencilIconFirstRecord = this.page.getByTitle("Edit").first();
-  readonly createdRecord = this.page.locator(".rt-tr-group", {
-    hasText: "Margo",
-  });
-  readonly editedRecord = this.page.locator(".rt-tr-group", {
-    hasText: "Maggie",
-  });
-  readonly searchRecord = this.page.locator(".rt-tr-group", {
-    hasText: "Cierra",
-  });
-  readonly recordInTable = this.page.locator(".rt-tr-group", {
-    hasText: "Alden",
-  });
+  readonly createdRecord = this.page.locator(".rt-tr-group", {hasText: "Margo"});
+  readonly editedRecord = this.page.locator(".rt-tr-group", {hasText: "Maggie",});
+  readonly searchRecord = this.page.locator(".rt-tr-group", {hasText: "Cierra",});
+  readonly recordInTable = this.page.locator(".rt-tr-group", {hasText: "Alden",});
   readonly modal = this.page.locator("modal-content");
   readonly closeIcon = this.page.locator(".sr-only");
   readonly searchField = this.page.getByPlaceholder("Type To Search");
+  readonly deleteIcon = this.page.locator("#delete-record-2");
 
   constructor(public readonly page: Page) {
     this.page = page;
@@ -76,6 +69,12 @@ export class WebTables {
   }
   async verifyIfSearchedRecordIsVisible() {
     await expect(this.searchRecord).toBeVisible();
+    await expect(this.recordInTable).toBeHidden();
+  }
+  async deleteRecord() {
+    await this.deleteIcon.click();
+  }
+  async verifyIfRecordwasDeleted(){
     await expect(this.recordInTable).toBeHidden();
   }
 }

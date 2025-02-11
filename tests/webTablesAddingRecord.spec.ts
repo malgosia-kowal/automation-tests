@@ -50,4 +50,8 @@ test.describe("webTables", () => {
     await webTables.clickOnSearchField();
     await webTables.verifyIfSearchedRecordIsVisible();
   });
+  test("Verify if user is able to delete a record", async ({}) => {
+    await webTables.deleteRecord();
+    await webTables.verifyIfRecordwasDeleted();
+  });
 });
