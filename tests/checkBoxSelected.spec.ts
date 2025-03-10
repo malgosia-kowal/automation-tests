@@ -1,4 +1,4 @@
-import { Navigation } from "pages/Navigation";
+import { Navigation } from "../pages/Navigation";
 import { test, expect } from "@playwright/test";
 import { CheckBox } from "../pages/CheckBox";
 

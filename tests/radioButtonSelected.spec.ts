@@ -1,6 +1,6 @@
-import { Navigation } from "pages/Navigation";
+import { Navigation } from "../pages/Navigation";
 import { test, expect } from "@playwright/test";
-import { RadioButtons } from "pages/RadioButtons";
+import { RadioButtons } from "../pages/RadioButtons";
 
 test.describe("SelectingRadioButtons", () => {
   let navigation: Navigation;
@@ -14,12 +14,13 @@ test.describe("SelectingRadioButtons", () => {
     await navigation.clickOnTileFirst();
     await navigation.clickOnRadioButtonOption();
   });
-  test("clickRadioButtonYes", async () => {
-    await radioButtons.clickRadioButtonYes();
-    await radioButtons.verifyIfYesRadioButtonWasSelected();
-  });
-  test("clickRadioButtonImpressive", async () => {
-    await radioButtons.clickRadioButtonImpressive();
-    await radioButtons.verifyIfImpressiveRadioButtonWasSelected();
-  });
+
+  const radioOptions: string[] = ["Yes", "Impressive"];
+
+  for (const radioOption of radioOptions) {
+    test(`clickRadioButton ${radioOption}`, async () => {
+      await radioButtons.clickRadioButton(radioOption);
+      await radioButtons.verifyIfRadioButtonWasSelected(radioOption);
+    });
+  }
 });

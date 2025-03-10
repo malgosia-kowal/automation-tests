@@ -1,23 +1,22 @@
 import { Page, expect, chromium } from "@playwright/test";
 
 export class WebTables {
-  readonly addButton = this.page.getByRole("button").getByText("Add");
-  readonly firstName = this.page.getByPlaceholder("First Name");
-  readonly lastName = this.page.getByPlaceholder("Last Name");
-  readonly age = this.page.getByPlaceholder("Age");
-  readonly salary = this.page.getByPlaceholder("Salary");
-  readonly department = this.page.getByPlaceholder("Department");
-  readonly buttonSubmit = this.page.getByRole("button", { name: "Submit" });
-  readonly email = this.page.getByPlaceholder("name@example.com");
-  readonly pencilIconFirstRecord = this.page.getByTitle("Edit").first();
-  readonly createdRecord = this.page.locator(".rt-tr-group", {hasText: "Margo"});
-  readonly editedRecord = this.page.locator(".rt-tr-group", {hasText: "Maggie",});
-  readonly searchRecord = this.page.locator(".rt-tr-group", {hasText: "Cierra",});
-  readonly recordInTable = this.page.locator(".rt-tr-group", {hasText: "Alden",});
-  readonly modal = this.page.locator("modal-content");
+  readonly addButton = this.page.locator("#addNewRecordButton");
+  readonly firstName = this.page.locator("#firstName");
+  readonly lastName = this.page.locator("#lastName");
+  readonly age = this.page.locator("#age");
+  readonly salary = this.page.locator("#salary");
+  readonly department = this.page.locator("#department");
+  readonly buttonSubmit = this.page.locator("#submit");
+  readonly email = this.page.locator("#userEmail");
+  readonly createdRecord = this.page.locator(".rt-td").nth(21);
+  readonly editedRecord = this.page.locator(".rt-td").nth(0);
+  //readonly recordInTable = this.page.locator(".rt-tr-group", {hasText: "Alden",});
+  readonly modal = this.page.locator("#userForm");
   readonly closeIcon = this.page.locator(".sr-only");
-  readonly searchField = this.page.getByPlaceholder("Type To Search");
-  readonly deleteIcon = this.page.locator("#delete-record-2");
+  readonly searchField = this.page.locator("#searchBox");
+  readonly deleteRecord = this.page.locator("#delete-record-2");
+  readonly tableRows = this.page.locator(".rt-tr-group");
 
   constructor(public readonly page: Page) {
     this.page = page;
@@ -46,35 +45,49 @@ export class WebTables {
   async clickOnSubmit() {
     await this.buttonSubmit.click();
   }
-  async clickOnPencil() {
-    await this.pencilIconFirstRecord.click();
+  async clickOnPencilIcon(recordId: string) {
+    await this.page.locator(recordId).click();
   }
-  async verifyIfRecordWasAdded() {
-    await expect(this.createdRecord).toBeVisible();
+  async verifyRecord(name: string) {
+    await expect(this.createdRecord).toHaveText(name);
   }
-  async verifyIfRecordWasUpdated() {
-    await expect(this.editedRecord).toBeVisible();
+  async verifyEditedRecord(name: string) {
+    await expect(this.editedRecord).toHaveText(name);
   }
   async verifyIfFormIsVisible() {
-    await expect(this.modal).toBeVisible;
+    await expect(this.modal).toBeVisible();
   }
   async verifyIfFormIsNotVisible() {
     await expect(this.modal).toBeHidden();
   }
-  async clickOnCloseModal() {
+  async clickOnCloseIcon() {
     await this.closeIcon.click();
   }
-  async clickOnSearchField() {
-    await this.searchField.fill("Cierra");
+  async typeRecordToSearch(recordName: string) {
+    const recordsBeforeSearch = await this.getTotalRows();
+    await this.searchField.fill(recordName);
+    const recordsAfterSearch = await this.getTotalRows();
+    expect(recordsAfterSearch).toBeLessThan(recordsBeforeSearch);
   }
-  async verifyIfSearchedRecordIsVisible() {
-    await expect(this.searchRecord).toBeVisible();
-    await expect(this.recordInTable).toBeHidden();
+  async verifyIfSearchedRecordIsVisible(recordName: string) {
+    await expect(
+      this.page.locator(".rt-tr-group", { hasText: recordName }),
+    ).toBeVisible();
   }
-  async deleteRecord() {
-    await this.deleteIcon.click();
+  async deleteRecordById(id: string) {
+    const sum = await this.getTotalRows();
+
+    await this.page.locator(id).click();
+    const after = await this.getTotalRows();
+    await expect(after).toBeLessThan(sum);
   }
-  async verifyIfRecordwasDeleted(){
-    await expect(this.recordInTable).toBeHidden();
+  async verifyIfRecordwasDeleted(id: string) {
+    await expect(this.page.locator(id)).toBeHidden();
+  }
+  public async getTotalRows(): Promise<number> {
+    const rows = await this.tableRows.allInnerTexts();
+    console.log("Raw rows:", rows);
+    const notEmptyRows = rows.filter((row) => row.trim() !== "");
+    return notEmptyRows.length;
   }
 }

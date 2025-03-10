@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { Navigation } from "../pages/Navigation";
-import { TextBox } from "pages/TextBox";
+import { TextBox } from "../pages/TextBox";
 
 test.describe("textBoxSuite", () => {
   let navigation: Navigation;
