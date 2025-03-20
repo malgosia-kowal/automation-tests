@@ -11,11 +11,10 @@ export class WebTables {
   readonly email = this.page.locator("#userEmail");
   readonly createdRecord = this.page.locator(".rt-td").nth(21);
   readonly editedRecord = this.page.locator(".rt-td").nth(0);
-  //readonly recordInTable = this.page.locator(".rt-tr-group", {hasText: "Alden",});
   readonly modal = this.page.locator("#userForm");
   readonly closeIcon = this.page.locator(".sr-only");
   readonly searchField = this.page.locator("#searchBox");
-  readonly deleteRecord = this.page.locator("#delete-record-2");
+  //readonly deleteRecord = this.page.locator("#delete-record-2");
   readonly tableRows = this.page.locator(".rt-tr-group");
 
   constructor(public readonly page: Page) {
@@ -45,8 +44,8 @@ export class WebTables {
   async clickOnSubmit() {
     await this.buttonSubmit.click();
   }
-  async clickOnPencilIcon(recordId: string) {
-    await this.page.locator(recordId).click();
+  async clickOnPencilIcon(recordId: number) {
+    await this.page.locator(`#edit-record-${recordId}`).click();
   }
   async verifyRecord(name: string) {
     await expect(this.createdRecord).toHaveText(name);
@@ -70,14 +69,12 @@ export class WebTables {
     expect(recordsAfterSearch).toBeLessThan(recordsBeforeSearch);
   }
   async verifyIfSearchedRecordIsVisible(recordName: string) {
-    await expect(
-      this.page.locator(".rt-tr-group", { hasText: recordName }),
-    ).toBeVisible();
+    await expect(this.page.locator(".rt-tr-group", { hasText: recordName }),).toBeVisible();
   }
-  async deleteRecordById(id: string) {
+  async deleteRecordById(id: number) {
     const sum = await this.getTotalRows();
 
-    await this.page.locator(id).click();
+    await this.page.locator(`#delete-record-${id}`).click();
     const after = await this.getTotalRows();
     await expect(after).toBeLessThan(sum);
   }

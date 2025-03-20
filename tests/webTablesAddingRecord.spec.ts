@@ -26,7 +26,7 @@ test.describe("webTables", () => {
     await webTables.verifyRecord("Margo");
   });
   test("Edit record in webTables", async ({}) => {
-    await webTables.clickOnPencilIcon("#edit-record-1");
+    await webTables.clickOnPencilIcon(1);
     await webTables.typeFirstName("Maggie");
     await webTables.typeLastName("Tester");
     await webTables.typeEmail("updatedEmail@op.pl");
@@ -51,6 +51,6 @@ test.describe("webTables", () => {
     await webTables.verifyIfSearchedRecordIsVisible("Cierra");
   });
   test("Verify if user is able to delete a record", async ({}) => {
-    await webTables.deleteRecordById("#delete-record-2");
+    await webTables.deleteRecordById(2);
   });
 });
