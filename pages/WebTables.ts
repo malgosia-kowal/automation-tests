@@ -69,7 +69,9 @@ export class WebTables {
     expect(recordsAfterSearch).toBeLessThan(recordsBeforeSearch);
   }
   async verifyIfSearchedRecordIsVisible(recordName: string) {
-    await expect(this.page.locator(".rt-tr-group", { hasText: recordName }),).toBeVisible();
+    await expect(
+      this.page.locator(".rt-tr-group", { hasText: recordName }),
+    ).toBeVisible();
   }
   async deleteRecordById(id: number) {
     const sum = await this.getTotalRows();

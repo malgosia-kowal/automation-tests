@@ -6,6 +6,7 @@ export class Navigation {
   readonly checkBoxMenu = this.page.locator(':text-is("Check Box")');
   readonly radioButton = this.page.locator(':text-is("Radio Button")');
   readonly webTables = this.page.locator(".text", { hasText: "Web Tables" });
+  readonly downloadUpload = this.page.locator("#item-7").first();
 
   constructor(public readonly page: Page) {
     this.page = page;
@@ -29,5 +30,8 @@ export class Navigation {
   }
   async clickOnWebTablesOption() {
     await this.webTables.click();
+  }
+  async clickOnDownloadUploadOption() {
+    await this.downloadUpload.click();
   }
 }
