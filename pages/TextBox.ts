@@ -3,7 +3,9 @@ import { Page, expect, chromium } from "@playwright/test";
 export class TextBox {
   readonly fullNameInput = this.page.locator('[placeholder="Full Name"]');
   readonly emailInput = this.page.locator('[placeholder="name@example.com"]');
-  readonly currentAddressInput = this.page.locator('[placeholder= "Current Address"]',);
+  readonly currentAddressInput = this.page.locator(
+    '[placeholder= "Current Address"]',
+  );
   readonly permanentAddressInput = this.page.locator("#permanentAddress");
   readonly submitButton = this.page.locator("#submit");
 
